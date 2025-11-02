@@ -7,6 +7,10 @@ dist/
 # dependencies
 node_modules/
 
+#Astro
+.dist/
+.cache/
+
 # logs
 npm-debug.log*
 yarn-debug.log*

@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*lignt-mode default*/
+html {
+    @apply bg-secondary text-primary;
+}
+
+a { @apply text-accent hover:underline; }
+button, .btn { @apply bg-primary text-white hover:bg-accent;}
+ 
+/*dark-mode*/
+html.dark {
+    @apply bg-dark-secondary text-dark-primary;
+}
+html.dark a { @apply text-dark-primary hover: text-dark-accent; }
+html.dark .btn { @apply bg-dark-primary hover:bg-dark-accent; }
