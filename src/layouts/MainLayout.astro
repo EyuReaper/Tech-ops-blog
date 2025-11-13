@@ -12,27 +12,51 @@ const { title } = Astro.props;
     <title>{title} | Tech Ops</title>
     <meta name="description" content="Exploring technology, operations, and scalable systems." />
     <link rel="icon" href="/favicon.svg" />
+
+    <!-- ORBITRON 900 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet" />
+
     <script is:inline>
-      // Apply saved theme on load
       const theme = localStorage.getItem('theme');
       if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark');
       }
     </script>
   </head>
-  <body class="bg-secondary-light dark:bg-secondary-dark text-text-light dark:text-text-dark min-h-screen flex flex-col">
+
+  <body class="bg-[var(--bg-secondary)] dark:bg-[var(--bg-secondary-dark)] text-[var(--text-primary)] dark:text-[var(--text-primary-dark)] min-h-screen flex flex-col font-sans">
     <Header />
     <main class="flex-grow container mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
       <slot />
     </main>
     <Footer />
-    <!-- ThemeToggle is already included in the Header; remove duplicate to avoid undefined/import issues -->
   </body>
 </html>
 
 <style is:global>
-  :root { --primary: #003366; --accent: #00CCFF; }
-  .dark { --primary: #00CCFF; --accent: #FF6600; }
-  .bg-secondary-light { @apply bg-[#F0F0F0]; }
-  .bg-secondary-dark { @apply bg-[#111111]; }
+  /* Define CSS Variables */
+  :root {
+    --bg-primary: #003366;
+    --bg-primary-dark: #00CCFF;
+    --bg-secondary: #F0F0F0;
+    --bg-secondary-dark: #111111;
+    --text-primary: #333333;
+    --text-primary-dark: #CCCCCC;
+    --accent: #00CCFF;
+    --accent-dark: #FF6600;
+  }
+
+  .dark {
+    --bg-primary: #00CCFF;
+    --bg-secondary: #111111;
+    --text-primary: #CCCCCC;
+    --accent: #FF6600;
+  }
+
+  /* Apply Orbitron globally to animated text */
+  .font-orbitron {
+    font-family: 'Orbitron', sans-serif;
+  }
 </style>
