@@ -1,11 +1,69 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+// src/pages/index.astro
+import MainLayout from '../layouts/MainLayout.astro';
+import BlogCard from '../components/BlogCard.astro';
+import TelegramFeed from '../components/TelegramFeed.vue';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Replace Astro.glob with import.meta.glob
+const postModules = import.meta.glob('../content/blog/*.md', { eager: true });
+const posts = Object.values(postModules);
+const recentPosts = posts
+  .sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date))
+  .slice(0, 3);
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<MainLayout title="Tech Ops">
+  <!-- HERO -->
+  <section class="lg:col-span-2">
+    <div
+      class="bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-accent)]/10 
+             dark:from-[var(--color-primary)]/20 dark:to-[var(--color-accent)]/20 
+             rounded-2xl p-10 mb-10"
+    >
+      <h1 class="text-5xl font-bold mb-4" style="color: var(--color-primary)">
+        Welcome to Tech Ops
+      </h1>
+      <p class="text-lg mb-6 text-gray-700 dark:text-gray-300">
+        Exploring technology, operations, and the art of building scalable systems.
+      </p>
+      <div class="flex gap-4">
+        <a href="/blog" class="btn-primary">Explore Blog</a>
+        <a href="/portfolio" class="btn-secondary">View Portfolio</a>
+      </div>
+    </div>
+
+    <!-- LATEST POSTS -->
+    <h2 class="text-2xl font-bold mb-6">Latest Posts</h2>
+    <div class="space-y-6">
+      {recentPosts.map((post) => (
+        <BlogCard post={post} />
+      ))}
+    </div>
+    <a href="/blog" class="block text-center mt-8 text-[var(--color-accent)] hover:underline">
+      View All Posts
+    </a>
+  </section>
+
+  <!-- SIDEBAR -->
+  <aside class="lg:col-span-1">
+    <TelegramFeed client:load />
+  </aside>
+</MainLayout>
+
+<style is:global>
+  .btn-primary {
+    @apply bg-[var(--color-primary)] text-white px-6 py-3 rounded-lg font-medium hover:opacity-90 transition;
+  }
+  .btn-secondary {
+    @apply border border-[var(--color-primary)] text-[var(--color-primary)]
+           dark:border-[var(--color-accent)] dark:text-[var(--color-accent)]
+           px-6 py-3 rounded-lg font-medium transition;
+
+    &:hover {
+      background-color: color-mix(in srgb, var(--color-primary) 10%, transparent);
+    }
+    .dark &:hover {
+      background-color: color-mix(in srgb, var(--color-accent) 10%, transparent);
+    }
+  }
+</style>

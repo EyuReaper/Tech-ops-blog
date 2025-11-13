@@ -1,24 +1,30 @@
+// tailwind.config.cjs
 /** @type {import('tailwindcss').Config} */
-export default {
-    content: [
-        './src/**/*.{astro,html,js,jsx,ts,tsx,vue}',],
-    darkMode: 'class',
-    theme: {
-        extend: {
-            colors: {
-                //light theme colors
-                primary: '#003366',
-                secondary: '#F0F0F0',
-                accent: '#00CCFF',
-                text: '#333333',
-                
-                //dark theme colors
-                'dark-primary': '#00CCFF',
-                'dark-secondary': '#111111',
-                'dark-accent': '#FF6600',
-                'dark-text': '#CCCCCC',
-            },
+module.exports = {
+  darkMode: 'class',
+    content: ['./src/**/*.{astro,html,js,ts,vue,md,mdx}','./public/index.html',],
+  
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          light: '#003366',
+          dark: '#00CCFF',
         },
+        secondary: {
+          light: '#F0F0F0',
+          dark: '#111111',
+        },
+        accent: {
+          light: '#00CCFF',
+          dark: '#FF6600',
+        },
+        text: {
+          light: '#333333',
+          dark: '#CCCCCC',
+        },
+      },
     },
+  },
     plugins: [],
 };

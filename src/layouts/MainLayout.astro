@@ -1,0 +1,38 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const { title } = Astro.props;
+---
+
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} | Tech Ops</title>
+    <meta name="description" content="Exploring technology, operations, and scalable systems." />
+    <link rel="icon" href="/favicon.svg" />
+    <script is:inline>
+      // Apply saved theme on load
+      const theme = localStorage.getItem('theme');
+      if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
+  </head>
+  <body class="bg-secondary-light dark:bg-secondary-dark text-text-light dark:text-text-dark min-h-screen flex flex-col">
+    <Header />
+    <main class="flex-grow container mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <slot />
+    </main>
+    <Footer />
+    <!-- ThemeToggle is already included in the Header; remove duplicate to avoid undefined/import issues -->
+  </body>
+</html>
+
+<style is:global>
+  :root { --primary: #003366; --accent: #00CCFF; }
+  .dark { --primary: #00CCFF; --accent: #FF6600; }
+  .bg-secondary-light { @apply bg-[#F0F0F0]; }
+  .bg-secondary-dark { @apply bg-[#111111]; }
+</style>

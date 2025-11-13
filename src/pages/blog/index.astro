@@ -1,0 +1,17 @@
+---
+// Paginated list
+import MainLayout from '../../layouts/MainLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+
+const posts = await Astro.glob('../../content/blog/*.md');
+const allPosts = posts.sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date));
+---
+
+<MainLayout title="Blog">
+  <section class="lg:col-span-3">
+    <h1 class="text-4xl font-bold mb-8">Blog</h1>
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {allPosts.map(post => <BlogCard {post} />)}
+    </div>
+  </section>
+</MainLayout>

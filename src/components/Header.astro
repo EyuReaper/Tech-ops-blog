@@ -1,0 +1,31 @@
+---
+import ThemeToggle from './ThemeToggle.vue';
+---
+
+<header class="bg-[var(--bg-secondary)] dark:bg-[var(--bg-secondary-dark)] border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50 backdrop-blur-sm bg-opacity-90">
+  <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+    <a href="/" class="flex items-center gap-3 group">
+      <div class="w-10 h-10 bg-[var(--bg-primary)] dark:bg-[var(--bg-primary-dark)] rounded-lg flex items-center justify-center text-white font-bold text-lg">
+        TO
+      </div>
+      <span class="text-xl font-bold text-[var(--text-primary)] dark:text-[var(--text-primary-dark)] group-hover:text-[var(--accent)] dark:group-hover:text-[var(--accent-dark)] transition">
+        Tech Ops
+      </span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/blog" class="nav-link">Blog</a>
+      <a href="/portfolio" class="nav-link">Portfolio</a>
+      <a href="/contact" class="nav-link">Contact</a>
+    </nav>
+
+    <ThemeToggle client:load />
+  </div>
+</header>
+
+<style is:global>
+  .nav-link {
+    @apply text-[var(--color-text)] font-medium hover:text-[var(--color-accent)] transition;
+  }
+</style>

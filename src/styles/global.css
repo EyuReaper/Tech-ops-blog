@@ -1,18 +1,37 @@
+/* src/styles/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/*lignt-mode default*/
-html {
-    @apply bg-secondary text-primary;
-}
+@layer base {
+  :root {
+    --bg-primary: #003366;
+    --color-primary-rgb: 0, 51, 102;
+    --bg-primary-dark: #00CCFF;
+    --color-accent-rgb: 0, 204, 255;
+    --bg-secondary: #F0F0F0;
+    --bg-secondary-dark: #111111;
+    --text-primary: #333333;
+    --text-primary-dark: #CCCCCC;
+    --accent: #00CCFF;
+    --accent-dark: #FF6600;
+  }
 
-a { @apply text-accent hover:underline; }
-button, .btn { @apply bg-primary text-white hover:bg-accent;}
- 
-/*dark-mode*/
-html.dark {
-    @apply bg-dark-secondary text-dark-primary;
+  .dark {
+    --bg-primary: #00CCFF;
+    --color-primary-rgb: 0, 204, 255;
+    --bg-secondary: #111111;
+    --color-accent-rgb: 255, 102, 0;
+    --text-primary: #CCCCCC;
+    --accent: #FF6600;
+  }
 }
-html.dark a { @apply text-dark-primary hover: text-dark-accent; }
-html.dark .btn { @apply bg-dark-primary hover:bg-dark-accent; }
+/* reusable component class */
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 rounded-lg font-medium transition hover:opacity-90;
+  }
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm hover:shadow-md transition;
+  }
+}

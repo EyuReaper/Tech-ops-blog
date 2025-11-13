@@ -1,0 +1,52 @@
+---
+export interface Props {
+  post: any;
+}
+const { post } = Astro.props;
+const { title, description, date, readTime, tags } = post.frontmatter;
+const formattedDate = new Date(date).toLocaleDateString('en-US', {
+  month: 'short',
+  day: 'numeric',
+  year: 'numeric',
+});
+---
+
+<article class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+  <time class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-2">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+    </svg>
+    {formattedDate} • {readTime}
+  </time>
+
+  <h3 class="text-xl font-bold mt-3 mb-2 text-[var(--bg-primary)] dark:text-[var(--bg-primary-dark)]">
+    <a href={`/blog/${post.slug}/`} class="hover:underline">
+      {title}
+    </a>
+  </h3>
+
+  <p class="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
+    {description}
+  </p>
+
+  <div class="flex flex-wrap gap-2">
+    {tags.map((tag: string) => (
+      <span class="text-xs px-3 py-1 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] dark:bg-[var(--accent-dark)]/20 dark:text-[var(--accent-dark)]">
+        {tag}
+      </span>
+    ))}
+  </div>
+
+  <a href={`/blog/${post.slug}/`} class="mt-4 inline-block text-sm font-medium text-[var(--accent)] dark:text-[var(--accent-dark)] hover:underline">
+    Read More →
+  </a>
+</article>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
